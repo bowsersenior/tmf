@@ -42,7 +42,7 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     Object.to_s
     # => "Object"
 
-    stub( Object, :to_s, :cheezburger) do
+    stub(Object, :to_s, :cheezburger) do
       Object.to_s
     end
     # => :cheezburger
@@ -76,9 +76,13 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     assert ('Bar', f.class)
     # => TMF::AssertionFailed: Expected Bar to equal Foo
 
-    stub(f, :bar, :baz){ assert(f.bar, :baz) }
+    stub(f, :bar, :baz) do
+      assert(f.bar, :baz)
+    end
     # => true
 
-    stub(f, :bar, :baz){ assert(f.bar, :snafu) }
+    stub(f, :bar, :baz) do
+      assert(f.bar, :snafu)
+    end
     # TMF::AssertionFailed: Expected baz to equal snafu
 ```
