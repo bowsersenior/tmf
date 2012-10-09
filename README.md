@@ -38,6 +38,15 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     Object.foo
     # => NoMethodError: undefined method `foo' for Object:Class
 
+    Object.methods.grep /foo/
+    # => []
+
+    stub(Object, :foo, :bar){ Object.methods.grep /foo/ }
+    # => [:foo]
+
+    Object.methods.grep /foo/
+    # => []
+
     # stub can also override existing methods
     Object.to_s
     # => "Object"
@@ -106,6 +115,31 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
         $!.message.include?("undefined method `nothingthere'"),
         true
       )
+    end
+    # => true
+
+    # Multiple stubs via nesting
+    stub(Object, :foo, :bar) do
+      stub(Object, :sna, :fu) do
+        assert(
+          [Object.foo, Object.sna],
+          [:bar, :fu]
+        )
+      end
+    end
+    # => true
+
+    # Override previous stubs
+    stub(Object, :foo, :bar) do
+      assert(Object.foo, :bar)
+
+      stub(Object, :foo, :baz) do
+        assert(Object.foo, :baz)
+
+        stub(Object, :foo, :snafu) do
+          assert(Object.foo, :snafu)
+        end
+      end
     end
     # => true
 ```
