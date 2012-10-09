@@ -7,7 +7,7 @@ RSpec is powerful and vast, but after using it extensively, I came to realize th
 * assert
 * stub
 
-TMF is an attempt to provide a minimal but useful testing tool for ruby. It's not even a gem, just copy the code and you're done. It's less than 50 LOC at the moment.
+TMF is an attempt to provide a minimal but useful testing tool for ruby. It's not even a gem, just copy the code and you're done. It's about 20 LOC at the moment.
 
 There are no tests for TMF itself. My goal is for it to be as simple as possible. Using another testing tool to test TMF seems wrong, and using it to test itself is also not right.
 
@@ -74,6 +74,8 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
 
     include TMF
 
+    class Foo; end
+
     f = Foo.new
 
     # passing test
@@ -85,8 +87,8 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     # => TMF::AssertionFailed: Expected Bar to equal Foo
 
     # stub with passing test
-    stub(f, :bar, :baz) do
-      assert(f.bar, :baz)
+    stub(f, :class, 'Bar') do
+      assert('Bar', f.class)
     end
     # => true
 
