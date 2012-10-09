@@ -15,6 +15,8 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
 
 ## Usage:
 
+```ruby
+
     include TMF
 
     assert(1 + 1, 2)
@@ -48,15 +50,17 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     # outside the stub block to_s is back to normal
     Object.to_s
     # => "Object"
-
+```
 
 ## More Examples
 
+```ruby
+
     # let's say you have some code in foo.rb:
     class Foo
-     def bar
-       :bar
-     end
+      def bar
+        :bar
+      end
     end
 
     # foo_test.rb
@@ -77,3 +81,4 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
 
     stub(f, :bar, :baz){ assert(f.bar, :snafu) }
     # TMF::AssertionFailed: Expected baz to equal snafu
+```
