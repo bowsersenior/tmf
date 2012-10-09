@@ -54,16 +54,21 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
 
 ## A more detailed example
 
+Let's say you have a file `PROJECT_ROOT/lib/foo.rb` with the following:
+
 ```ruby
 
-    # PROJECT_ROOT/lib/foo.rb
     class Foo
       def bar
         :bar
       end
     end
+```
 
-    # PROJECT_ROOT/test/foo_test.rb
+And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
+
+```ruby
+
     require_relative '../lib/foo.rb'
     require_relative './tmf.rb'
 
@@ -103,7 +108,7 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     # => true
 ```
 
-To run the tests above:
+Then, you can run the tests above with:
 
 ```shell
 
