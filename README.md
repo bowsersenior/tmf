@@ -52,37 +52,61 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     # => "Object"
 ```
 
-## More Examples
+## A more detailed example
 
 ```ruby
 
-    # let's say you have some code in foo.rb:
+    # PROJECT_ROOT/lib/foo.rb
     class Foo
       def bar
         :bar
       end
     end
 
-    # foo_test.rb
-    require 'foo.rb'
+    # PROJECT_ROOT/test/foo_test.rb
+    require_relative '../lib/foo.rb'
+    require_relative './tmf.rb'
 
     include TMF
 
     f = Foo.new
 
+    # passing test
     assert(Foo, f.class)
     # => true
 
-    assert ('Bar', f.class)
+    # failing test
+    assert('Bar', f.class)
     # => TMF::AssertionFailed: Expected Bar to equal Foo
 
+    # stub with passing test
     stub(f, :bar, :baz) do
       assert(f.bar, :baz)
     end
     # => true
 
+    # stub with failing test
     stub(f, :bar, :baz) do
       assert(f.bar, :snafu)
     end
     # TMF::AssertionFailed: Expected baz to equal snafu
+
+    # testing a raised error
+    begin
+      f.nothingthere
+    rescue NoMethodError
+      assert(
+        $!.message.include?("undefined method `nothingthere'"),
+        true
+      )
+    end
+    # => true
+```
+
+To run the tests above:
+
+```shell
+
+    $ ruby test/foo_test.rb && echo "all tests pass"
+    # => all tests pass
 ```
