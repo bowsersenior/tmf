@@ -142,6 +142,15 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
       end
     end
     # => true
+
+    # Chained stubs
+    # e.g. Object.foo.bar
+    stub(Object, :foo, nil) do
+      stub( Object.foo, :bar, :baz ) do
+        Object.foo.bar
+      end
+    end
+    # => :baz
 ```
 
 Then, you can run the tests above with:
