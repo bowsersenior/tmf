@@ -28,13 +28,13 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     assert(Object.foo, :bar)
     # => NoMethodError: undefined method `foo' for Object:Class
 
-    stub( Object, :foo) do
+    stub(Object, :foo) do
       # within this block, Object.foo returns nil
       assert(Object.foo, nil)
     end
     # => true
 
-    stub( Object, :foo, :bar) do
+    stub(Object, :foo, :bar) do
       # within this block, Object.foo returns :bar
       assert(Object.foo, :bar)
     end
