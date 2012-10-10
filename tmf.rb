@@ -31,7 +31,7 @@ module TMF
     a == b ? true : raise( AssertionFailed.new(a,b) )
   end
 
-  def stub(o, message, return_value)
+  def stub(o, message, return_value=nil)
     old_method = o.respond_to?(message) ? o.method(message).to_proc : nil
     o.singleton_class.send(:define_method, message) { return_value }
     yield if block_given?

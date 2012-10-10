@@ -28,6 +28,12 @@ I hope to use TMF in my projects to refine it and see if it is practical to do t
     assert(Object.foo, :bar)
     # => NoMethodError: undefined method `foo' for Object:Class
 
+    stub( Object, :foo) do
+      # within this block, Object.foo returns nil
+      assert(Object.foo, nil)
+    end
+    # => true
+
     stub( Object, :foo, :bar) do
       # within this block, Object.foo returns :bar
       assert(Object.foo, :bar)
@@ -145,7 +151,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
 
     # Chained stubs
     # e.g. Object.foo.bar
-    stub(Object, :foo, nil) do
+    stub(Object, :foo) do
       stub( Object.foo, :bar, :baz ) do
         Object.foo.bar
       end
