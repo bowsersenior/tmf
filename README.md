@@ -146,6 +146,26 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     end
     # => true
 
+    # stub to raise an error
+    stub(f, :method => :bar, :error => ZeroDivisionError) do
+      begin
+        f.bar
+      rescue
+        assert $!, :is_a? => ZeroDivisionError
+      end
+    end
+    # => true
+
+    # stub to raise an error
+    stub(f, :method => :bar, :error => ZeroDivisionError) do
+      begin
+        f.bar
+      rescue
+        assert $!, :is_a? => RuntimeError
+      end
+    end
+    # => TMF::ExpectationNotMet: Expected ZeroDivisionError is_a? RuntimeError
+
     # stub with spy and return value
     stub(f, :method => :bar, :return => :baz, :spy => true) do
       'all your base are belong to us'
