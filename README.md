@@ -9,7 +9,7 @@
 
 TMF is an attempt to provide a minimal but useful testing tool for ruby. It's not even a gem, just copy the code and you're done. It's about 30 LOC at the moment.
 
-There are no automated tests for TMF itself. My goal is to keep it as simple as possible. Using another testing tool to test TMF seems wrong, and using TMF to test itself is also not right. I do rigorously test TMF by hand using the examples in the README. The code is meant to be simple enough so that its correctness can be verified by hand.
+There are no automated tests for TMF itself. My goal is to keep it as simple as possible. Using another testing tool to test TMF seems wrong, and using TMF to test itself is also not right. Since I strive to keep the code simple enough that its correctness can be verified by hand, for now I test TMF manually (with rigor!) using the examples in the README.
 
 I will use TMF in my projects and discover if such a minimalistic tool can be practical. Along the way, I will refine its features and look forward to hearing what you think about TMF!
 
