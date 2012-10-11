@@ -36,12 +36,11 @@ module TMF
 
     called = false
     o.singleton_class.send(:define_method, opts[:method]) { called = 1; opts[:return] }
-    result = yield if block_given?
 
+    yield if block_given?
+  ensure
     raise ExpectationNotMet.new(o, opts[:method], 'receive') if opts[:spy] && !called
 
-    result
-  ensure
     old_method ?
       o.singleton_class.send(:define_method, opts[:method], old_method) :
       o.singleton_class.send(:undef_method, opts[:method])
