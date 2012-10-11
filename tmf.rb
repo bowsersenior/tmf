@@ -21,20 +21,14 @@
 # THE SOFTWARE.
 
 module TMF
-  class AssertionFailed < StandardError
-    def initialize(a, b)
-      super("Expected #{a} to equal #{b}")
-    end
-  end
-
   class ExpectationNotMet < StandardError
-    def initialize(o, method)
-      super("Expected #{o} to receive #{method}")
+    def initialize(o, method, verb)
+      super("Expected #{o} to #{verb} #{method}")
     end
   end
 
   def assert(a, opts)
-    a == opts[:equals] ? true : raise( AssertionFailed.new(a,opts[:equals]) )
+    a == opts[:equals] ? true : raise( ExpectationNotMet.new(a,opts[:equals], 'equal') )
   end
 
   def stub(o, opts)
@@ -44,7 +38,7 @@ module TMF
     o.singleton_class.send(:define_method, opts[:method]) { called = 1; opts[:return] }
     result = yield if block_given?
 
-    raise ExpectationNotMet.new(o, opts[:method]) if opts[:spy] && !called
+    raise ExpectationNotMet.new(o, opts[:method], 'receive') if opts[:spy] && !called
 
     result
   ensure

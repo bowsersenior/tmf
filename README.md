@@ -23,7 +23,7 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
     # => true
 
     assert(1 + 1, :equals => 3)
-    # => TMF::AssertionFailed: Expected 2 to equal 3
+    # => TMF::ExpectationNotMet: Expected 2 to equal 3
 
     assert(Object.foo, :equals => :bar)
     # => NoMethodError: undefined method `foo' for Object:Class
@@ -108,7 +108,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
 
     # failing test
     assert(f.class, :equals => 'Bar')
-    # => TMF::AssertionFailed: Expected Foo to equal Bar
+    # => TMF::ExpectationNotMet: Expected Foo to equal Bar
 
     # stub with passing test
     stub(f, :method => :class, :return => 'Bar') do
@@ -120,7 +120,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     stub(f, :method => :bar, :return => :baz) do
       assert(f.bar, :equals => :snafu)
     end
-    # TMF::AssertionFailed: Expected baz to equal snafu
+    # TMF::ExpectationNotMet: Expected baz to equal snafu
 
     # testing a raised error
     begin
