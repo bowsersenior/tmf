@@ -201,6 +201,11 @@ Then, you can run the tests above with:
     # => all tests pass
 ```
 
+For a real-world example of TMF in action, have a look at the [test files][4] and [Rakefile][5] for the [ItuCodes gem][6].
+
 [1]: https://www.relishapp.com/rspec
 [2]: http://docs.seattlerb.org/minitest/
 [3]: https://github.com/chneukirchen/bacon
+[4]: https://github.com/bowsersenior/itu_codes/tree/master/test
+[5]: https://github.com/bowsersenior/itu_codes/blob/master/Rakefile
+[6]: https://github.com/bowsersenior/itu_codes
