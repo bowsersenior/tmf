@@ -2,16 +2,16 @@
 
 ## Intro
 
-RSpec is powerful and vast, but after using it extensively, I came to realize that really good tests only use a small sliver of its feature set. I looked at alternatives like Minitest and Bacon, but then I thought that all you need for testing are 2 methods and 2 methods only:
+[RSpec][1] is powerful and vast, but after using it extensively, I came to realize that really good tests only use a small sliver of its feature set. I looked at alternatives like [minitest][2] and [Bacon][3], but then I had an interesting thought: you could write awesome tests using just 2 methods:
 
 * assert
 * stub
 
 TMF is an attempt to provide a minimal but useful testing tool for ruby. It's not even a gem, just copy the code and you're done. It's about 30 LOC at the moment.
 
-There are no tests for TMF itself. My goal is for it to be as simple as possible. Using another testing tool to test TMF seems wrong, and using it to test itself is also not right. I do rigorously test TMF by hand using the examples in the README. The code is meant to be simple enough so that its correctness can be verified by hand.
+There are no automated tests for TMF itself. My goal is to keep it as simple as possible. Using another testing tool to test TMF seems wrong, and using TMF to test itself is also not right. I do rigorously test TMF by hand using the examples in the README. The code is meant to be simple enough so that its correctness can be verified by hand.
 
-I hope to use TMF in my projects and discover if such a minimalistic tool can be practical. Along the way, I will refine its features and look forward to hearing from you as well!
+I will use TMF in my projects and discover if such a minimalistic tool can be practical. Along the way, I will refine its features and look forward to hearing what you think about TMF!
 
 ## Usage:
 
@@ -187,3 +187,7 @@ Then, you can run the tests above with:
     $ ruby test/foo_test.rb && echo "all tests pass"
     # => all tests pass
 ```
+
+[1]: https://www.relishapp.com/rspec
+[2]: http://docs.seattlerb.org/minitest/
+[3]: https://github.com/chneukirchen/bacon
