@@ -62,7 +62,7 @@ I hope to use TMF in my projects and discover if such a minimalistic tool can be
     end
     # => :cheezburger
 
-    # outside the stub block to_s is back to normal
+    # outside the stub block, Object.to_s is back to normal
     Object.to_s
     # => "Object"
 
