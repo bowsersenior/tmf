@@ -19,24 +19,30 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
 
     include TMF
 
-    assert(1 + 1, :equals => 2)
+    assert(1 + 1, :== => 2)
     # => true
 
-    assert(1 + 1, :equals => 3)
-    # => TMF::ExpectationNotMet: Expected 2 to equal 3
+    assert(1 + 1, :== => 3)
+    # => TMF::ExpectationNotMet: Expected 2 == 3
 
-    assert(Object.foo, :equals => :bar)
+    assert(1, :> => 0)
+    # true
+
+    assert(1, :eql? => 1.0)
+    # TMF::ExpectationNotMet: Expected 1 eql? 1.0
+
+    assert(Object.foo, :== => :bar)
     # => NoMethodError: undefined method `foo' for Object:Class
 
     stub(Object, :method => :foo) do
       # within this block, Object.foo returns nil
-      assert Object.foo, :equals => nil
+      assert Object.foo, :== => nil?
     end
     # => true
 
     stub(Object, :method => :foo, :return => :bar) do
       # within this block, Object.foo returns :bar
-      assert(Object.foo, :equals => :bar)
+      assert(Object.foo, :== => :bar)
     end
     # => true
 
@@ -103,24 +109,24 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     f = Foo.new
 
     # passing test
-    assert(f.class, :equals => Foo)
+    assert(f.class, :== => Foo)
     # => true
 
     # failing test
-    assert(f.class, :equals => 'Bar')
-    # => TMF::ExpectationNotMet: Expected Foo to equal Bar
+    assert(f.class, :== => 'Bar')
+    # => TMF::ExpectationNotMet: Expected Foo == Bar
 
     # stub with passing test
     stub(f, :method => :class, :return => 'Bar') do
-      assert(f.class, :equals => 'Bar')
+      assert(f.class, :== => 'Bar')
     end
     # => true
 
     # stub with failing test
     stub(f, :method => :bar, :return => :baz) do
-      assert(f.bar, :equals => :snafu)
+      assert(f.bar, :== => :snafu)
     end
-    # TMF::ExpectationNotMet: Expected baz to equal snafu
+    # TMF::ExpectationNotMet: Expected baz == snafu
 
     # testing a raised error
     begin
@@ -128,7 +134,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     rescue NoMethodError
       assert(
         $!.message.include?("undefined method `nothingthere'"),
-        :equals => true
+        :== => true
       )
     end
     # => true
@@ -141,7 +147,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
 
     # stub with spy and return value
     stub(f, :method => :bar, :return => :baz, :spy => true) do
-      assert(f.bar, :equals => :baz)
+      assert(f.bar, :== => :baz)
     end
     # => true
 
@@ -150,7 +156,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
       stub(f, :method => :sna, :return => :fu) do
         assert(
           [f.foo, f.sna],
-          :equals => [:bar, :fu]
+          :== => [:bar, :fu]
         )
       end
     end
@@ -158,13 +164,13 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
 
     # Override previous stubs
     stub(f, :method => :foo, :return => :bar) do
-      assert(f.foo, :equals => :bar)
+      assert(f.foo, :== => :bar)
 
       stub(f, :method => :foo, :return => :baz) do
-        assert(f.foo, :equals => :baz)
+        assert(f.foo, :== => :baz)
 
         stub(f, :method => :foo, :return => :snafu) do
-          assert(f.foo, :equals => :snafu)
+          assert(f.foo, :== => :snafu)
         end
       end
     end
@@ -174,7 +180,7 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     # e.g. f.foo.bar
     stub(f, :method => :foo) do
       stub( f.foo, :method => :bar, :return => :baz ) do
-        assert(f.foo.bar, :equals => :baz)
+        assert(f.foo.bar, :== => :baz)
       end
     end
     # => true

@@ -22,13 +22,15 @@
 
 module TMF
   class ExpectationNotMet < StandardError
-    def initialize(o, method, verb)
-      super("Expected #{o} to #{verb} #{method}")
+    def initialize(o, verb, value)
+      super("Expected #{o} #{verb} #{value}")
     end
   end
 
   def assert(a, opts)
-    a == opts[:equals] ? true : raise( ExpectationNotMet.new(a,opts[:equals], 'equal') )
+    opts.each do |meth, val|
+      a.send(meth, val) || raise( ExpectationNotMet.new(a, meth, val) )
+    end && true
   end
 
   def stub(o, opts)
@@ -39,7 +41,7 @@ module TMF
 
     yield if block_given?
   ensure
-    raise ExpectationNotMet.new(o, opts[:method], 'receive') if opts[:spy] && !called
+    raise ExpectationNotMet.new(o, 'to receive', opts[:method]) if opts[:spy] && !called
 
     old_method ?
       o.singleton_class.send(:define_method, opts[:method], old_method) :
