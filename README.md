@@ -146,10 +146,10 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     # => true
 
     # Multiple stubs via nesting
-    stub(Object, :method => :foo, :return => :bar) do
-      stub(Object, :method => :sna, :return => :fu) do
+    stub(f, :method => :foo, :return => :bar) do
+      stub(f, :method => :sna, :return => :fu) do
         assert(
-          [Object.foo, Object.sna],
+          [f.foo, f.sna],
           :equals => [:bar, :fu]
         )
       end
@@ -157,24 +157,24 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     # => true
 
     # Override previous stubs
-    stub(Object, :method => :foo, :return => :bar) do
-      assert(Object.foo, :equals => :bar)
+    stub(f, :method => :foo, :return => :bar) do
+      assert(f.foo, :equals => :bar)
 
-      stub(Object, :method => :foo, :return => :baz) do
-        assert(Object.foo, :equals => :baz)
+      stub(f, :method => :foo, :return => :baz) do
+        assert(f.foo, :equals => :baz)
 
-        stub(Object, :method => :foo, :return => :snafu) do
-          assert(Object.foo, :equals => :snafu)
+        stub(f, :method => :foo, :return => :snafu) do
+          assert(f.foo, :equals => :snafu)
         end
       end
     end
     # => true
 
     # Chained stubs
-    # e.g. Object.foo.bar
-    stub(Object, :method => :foo) do
-      stub( Object.foo, :method => :bar, :return => :baz ) do
-        assert(Object.foo.bar, :equals => :baz)
+    # e.g. f.foo.bar
+    stub(f, :method => :foo) do
+      stub( f.foo, :method => :bar, :return => :baz ) do
+        assert(f.foo.bar, :equals => :baz)
       end
     end
     # => true
