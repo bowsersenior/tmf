@@ -63,6 +63,12 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
     end
     # => RuntimeError: RuntimeError
 
+    stub(Object, :method => :bar, :error => ZeroDivisionError.new('any message you want')) do
+      # within this block, Object.bar raises a ZeroDivisionError
+      Object.bar
+    end
+    # => ZeroDivisionError: any message you want
+
     Object.methods.grep /foo/
     # => []
 
