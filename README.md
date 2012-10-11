@@ -57,6 +57,12 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
     Object.foo
     # => NoMethodError: undefined method `foo' for Object:Class
 
+    stub(Object, :method => :bar, :error => RuntimeError) do
+      # within this block, Object.bar raises a RuntimeError
+      Object.bar
+    end
+    # => RuntimeError: RuntimeError
+
     Object.methods.grep /foo/
     # => []
 
