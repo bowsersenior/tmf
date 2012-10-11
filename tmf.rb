@@ -27,17 +27,29 @@ module TMF
     end
   end
 
-  def assert(a, b)
-    a == b ? true : raise( AssertionFailed.new(a,b) )
+  class ExpectationNotMet < StandardError
+    def initialize(o, method)
+      super("Expected #{o} to receive #{method}")
+    end
   end
 
-  def stub(o, message, return_value=nil)
-    old_method = o.respond_to?(message) ? o.method(message).to_proc : nil
-    o.singleton_class.send(:define_method, message) { return_value }
-    yield if block_given?
+  def assert(a, opts)
+    a == opts[:equals] ? true : raise( AssertionFailed.new(a,opts[:equals]) )
+  end
+
+  def stub(o, opts)
+    old_method = o.respond_to?(opts[:method]) ? o.method(opts[:method]).to_proc : nil
+
+    called = false
+    o.singleton_class.send(:define_method, opts[:method]) { called = 1; opts[:return] }
+    result = yield if block_given?
+
+    raise ExpectationNotMet.new(o, opts[:method]) if opts[:spy] && !called
+
+    result
   ensure
     old_method ?
-      o.singleton_class.send(:define_method, message, old_method) :
-      o.singleton_class.send(:undef_method, message)
+      o.singleton_class.send(:define_method, opts[:method], old_method) :
+      o.singleton_class.send(:undef_method, opts[:method])
   end
 end
