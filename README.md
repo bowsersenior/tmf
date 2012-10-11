@@ -31,6 +31,13 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
     assert(1, :eql? => 1.0)
     # TMF::ExpectationNotMet: Expected 1 eql? 1.0
 
+    assert(1,
+      :<     => 2,
+      :>=    => 1,
+      :is_a? => Fixnum
+    )
+    # => true
+
     assert(Object.foo, :== => :bar)
     # => NoMethodError: undefined method `foo' for Object:Class
 
