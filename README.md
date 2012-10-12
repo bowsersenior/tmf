@@ -147,6 +147,15 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     end
     # TMF::ExpectationNotMet: Expected baz == snafu
 
+    # stub with specified arguments
+    stub(f, :method => :bar, :args => [1,2], :return => :boo) do
+      # within this block, f.bar(1,2) will return :boo
+      puts "f.bar(1,2) : #{f.bar(1,2)}"
+      puts "f.bar      : #{f.bar()}"  # this is not stubbed!
+    end
+    # => f.bar(1,2) : boo
+    # => NoMethodError: NoMethodError
+
     # testing a raised error
     begin
       f.nothingthere

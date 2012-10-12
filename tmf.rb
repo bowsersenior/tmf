@@ -37,9 +37,17 @@ module TMF
     old_method = o.respond_to?(opts[:method]) ? o.method(opts[:method]).to_proc : nil
 
     called = false
-    o.singleton_class.send(:define_method, opts[:method]) do
-      called = 1
-      opts[:error] ? raise(opts[:error]) : opts[:return]
+    o.singleton_class.send(:define_method, opts[:method]) do |*args|
+      if args == opts[:args]
+        called = 1
+        opts[:error] ? raise(opts[:error]) : opts[:return]
+      else
+        if old_method
+          old_method(*args)
+        else
+          raise NoMethodError.new
+        end
+      end
     end
 
     yield if block_given?
