@@ -43,7 +43,7 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
 
     stub(Object, :method => :foo) do
       # within this block, Object.foo returns nil
-      assert Object.foo, :== => nil?
+      assert Object.foo, :== => nil
     end
     # => true
 
