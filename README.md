@@ -92,12 +92,12 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
     # => "Object"
 
     # set a spy to check if the stub was called
-    stub(Object, :method => :foo, :spy => true) do
+    stub(Object, :spy => :foo) do
       'y u no call ?'
     end
     # => TMF::ExpectationNotMet: Expected Object to receive foo
 
-    stub(Object, :method => :foo, :spy => true) do
+    stub(Object, :spy => :foo) do
       Object.foo
     end
     # => nil
@@ -179,13 +179,13 @@ And you also have a file `PROJECT_ROOT/test/foo_test.rb` with the following:
     # => TMF::ExpectationNotMet: Expected ZeroDivisionError is_a? RuntimeError
 
     # stub with spy and return value
-    stub(f, :method => :bar, :return => :baz, :spy => true) do
+    stub(f, :spy => :bar, :return => :baz) do
       'all your base are belong to us'
     end
     # => TMF::ExpectationNotMet: Expected #<Foo:0x007f85331b4ee0> to receive bar
 
     # stub with spy and return value
-    stub(f, :method => :bar, :return => :baz, :spy => true) do
+    stub(f, :spy => :bar, :return => :baz) do
       assert(f.bar, :== => :baz)
     end
     # => true

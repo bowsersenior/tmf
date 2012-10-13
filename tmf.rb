@@ -34,6 +34,7 @@ module TMF
   end
 
   def stub(o, opts)
+    opts[:method] = opts[:spy] if opts.has_key?(:spy)
     old_method = o.respond_to?(opts[:method]) ? o.method(opts[:method]).to_proc : nil
 
     called = false
