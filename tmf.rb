@@ -37,7 +37,7 @@ module TMF
     old_method = o.respond_to?(opts[:method]) ? o.method(opts[:method]).to_proc : nil
 
     called = false
-    o.singleton_class.send(:define_method, opts[:method]) do
+    o.singleton_class.send(:define_method, opts[:method]) do |*args|
       called = 1
       opts[:error] ? raise(opts[:error]) : opts[:return]
     end
