@@ -237,7 +237,7 @@ Then, you can run the tests above with:
 For a real-world example of TMF in action, have a look at these uses of TMF in the wild:
 
 * [test files][4] and [Rakefile][5] for [ItuCodes][6]
-* [test files][7] and [Rakefile][8] for [Gauntlt]9]
+* [test files][7] and [Rakefile][8] for [Gauntlt][9]
 
 [1]: https://www.relishapp.com/rspec
 [2]: http://docs.seattlerb.org/minitest/
