@@ -17,6 +17,7 @@ I will use TMF in my projects and discover if such a minimalistic tool can be pr
 
 ```ruby
 
+    require 'tmf'
     include TMF
 
     assert(1 + 1, :== => 2)
@@ -233,7 +234,10 @@ Then, you can run the tests above with:
     # => all tests pass
 ```
 
-For a real-world example of TMF in action, have a look at the [test files][4] and [Rakefile][5] for the [ItuCodes gem][6].
+For a real-world example of TMF in action, have a look at these uses of TMF in the wild:
+
+* [test files][4] and [Rakefile][5] for [ItuCodes][6]
+* [test files][7] and [Rakefile][8] for [Gauntlt]9]
 
 [1]: https://www.relishapp.com/rspec
 [2]: http://docs.seattlerb.org/minitest/
@@ -241,3 +245,6 @@ For a real-world example of TMF in action, have a look at the [test files][4] an
 [4]: https://github.com/bowsersenior/itu_codes/tree/master/test
 [5]: https://github.com/bowsersenior/itu_codes/blob/master/Rakefile
 [6]: https://github.com/bowsersenior/itu_codes
+[7]: https://github.com/thegauntlet/gauntlt/tree/master/test
+[8]: https://github.com/thegauntlet/gauntlt/blob/master/gem_tasks/test.rake
+[9]: https://github.com/thegauntlet/gauntlt
