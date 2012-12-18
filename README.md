@@ -245,6 +245,6 @@ For a real-world example of TMF in action, have a look at these uses of TMF in t
 [4]: https://github.com/bowsersenior/itu_codes/tree/master/test
 [5]: https://github.com/bowsersenior/itu_codes/blob/master/Rakefile
 [6]: https://github.com/bowsersenior/itu_codes
-[7]: https://github.com/thegauntlet/gauntlt/tree/master/test
-[8]: https://github.com/thegauntlet/gauntlt/blob/master/gem_tasks/test.rake
-[9]: https://github.com/thegauntlet/gauntlt
+[7]: https://github.com/gauntlt/gauntlt/tree/master/test
+[8]: https://github.com/gauntlt/gauntlt/blob/master/gem_tasks/test.rake
+[9]: https://github.com/gauntlt/gauntlt
