@@ -30,7 +30,7 @@ module TMF
   def assert(a, opts)
     opts.each do |meth, val|
       a.send(meth, val) || raise( ExpectationNotMet.new(a, meth, val) )
-    end && true
+    end && true # always return true or raise an error
   end
 
   def stub(o, opts)
