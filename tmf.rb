@@ -21,6 +21,8 @@
 # THE SOFTWARE.
 
 module TMF
+  VERSION = "0.1.0"
+  
   class ExpectationNotMet < StandardError
     def initialize(o, verb, value)
       super("Expected #{o} #{verb} #{value}")
