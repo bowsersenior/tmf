@@ -30,6 +30,9 @@ module TMF
   end
 
   def assert(a, opts)
+    # support plain assertions, e.g. : assert(true)
+    opts = {:== => true} if opts == {}
+    
     opts.each do |meth, val|
       a.send(meth, val) || raise( ExpectationNotMet.new(a, meth, val) )
     end && true # always return true or raise an error
